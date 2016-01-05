@@ -4,13 +4,14 @@
 
 #include "SpreadsheetCopy.h"
 
-using namespace libxl;
+using namespace YExcel ;
 using namespace std;
 
 
 int main(int argc, char ** argv) {
 
 	//open source and destination workbooks
+	/*
 	Book * sourceBook = xlCreateXMLBook() ;
 	
 	Book * destinationBook = xlCreateXMLBook() ;
@@ -24,7 +25,8 @@ int main(int argc, char ** argv) {
 
 	
 	copySpreadsheetData(sourceBook, destinationBook) ;
-
+	
+	 */
 
 
 

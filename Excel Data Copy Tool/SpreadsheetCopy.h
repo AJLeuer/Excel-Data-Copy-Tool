@@ -7,5 +7,6 @@
 
 
 using namespace std;
+using namespace YExcel ;
 
-void copySpreadsheetData(Book * source, Book * destination) ;
+void copySpreadsheetData(BasicExcel * source, BasicExcel * destination) ;

@@ -1,12 +1,12 @@
 #include "SpreadsheetCopy.h"
 
 
-void copySpreadsheetData(Book * sourceBook, Book * destinationBook) {
+void copySpreadsheetData(BasicExcel * source, BasicExcel * destination) {
 
 	//We expect the list of transactions (the source) to be sheet at index 1 (the second sheet)
-	Sheet * sourceSheet = sourceBook->getSheet(1) ;
+	//BasicExcelWorksheet* sourceSheet = sourceBook->getSheet(1) ;
 	
-	wstring test = sourceSheet->readStr(4, 5) ;
+	//wstring test = sourceSheet->readStr(4, 5) ;
 
 	//
 	
