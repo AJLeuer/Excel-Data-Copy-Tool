@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4ADBE47A-C356-4B60-A14B-EF0E4A2972F6</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Excel Data Copy Tool</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>104D78E33C6B790E975865C42D0377E093E7007B</key>
+		<string>https://github.com/AJLeuer/Excel-Data-Copy-Tool.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Excel Data Copy Tool.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>104D78E33C6B790E975865C42D0377E093E7007B</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/AJLeuer/Excel-Data-Copy-Tool.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>104D78E33C6B790E975865C42D0377E093E7007B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>104D78E33C6B790E975865C42D0377E093E7007B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Excel%20Data%20Copy%20Tool</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -1,3 +1,6 @@
+
+#pragma once
+
 #include <iostream>
 #include <string>
 
@@ -12,8 +15,8 @@ class DreamSheet : public BasicExcelWorksheet {
 public:
 
 	using BasicExcelWorksheet::BasicExcelWorksheet ;
-	
-	//DreamSheet(const Sheet & sheet) : Sheet(sheet) {}
+
+	DreamSheet(const BasicExcelWorksheet & sheet) : BasicExcelWorksheet(sheet) {}
 
 	wstring getRowName(unsigned rowNumber) ;
 

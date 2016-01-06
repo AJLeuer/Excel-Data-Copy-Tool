@@ -619,7 +619,7 @@ int CompoundFile::PresentWorkingDirectory(wchar_t* path)
 			  currentDirectory_->self_->name_+directoryLength,
 			  directory.begin()+1);
 		fullpath.insert(fullpath.begin(), directory.begin(), directory.end());		
-	} while (currentDirectory_ = currentDirectory_->parent_);
+	} while (currentDirectory_ == currentDirectory_->parent_);
 
 	fullpath.erase(fullpath.begin(), fullpath.begin()+11);
 	if (fullpath.empty()) fullpath.push_back(L'\\');
@@ -644,7 +644,7 @@ int CompoundFile::PresentWorkingDirectory(vector<wchar_t>& path)
 			  currentDirectory_->self_->name_+directoryLength,
 			  directory.begin()+1);
 		path.insert(path.begin(), directory.begin(), directory.end());		
-	} while (currentDirectory_ = currentDirectory_->parent_);
+	} while (currentDirectory_ == currentDirectory_->parent_);
 
 	path.erase(path.begin(), path.begin()+11);
 	if (path.empty()) path.push_back(L'\\');
@@ -5132,7 +5132,7 @@ void BasicExcel::UpdateWorksheets()
 
 		// References and pointers to shorten code
 		vector<Worksheet::CellTable::RowBlock>& rRowBlocks = worksheets_[s].cellTable_.rowBlocks_;
-		vector<Worksheet::CellTable::RowBlock::CellBlock>* pCellBlocks;
+		vector<Worksheet::CellTable::RowBlock::CellBlock>* pCellBlocks = nullptr;
 		Worksheet::CellTable::RowBlock::CellBlock* pCell;
 		rRowBlocks.resize(maxRows/32 + (maxRows%32 ? 1 : 0));
 		for (size_t r=0, curRowBlock=0; r<maxRows; ++r)

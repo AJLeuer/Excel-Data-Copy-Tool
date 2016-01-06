@@ -1,3 +1,6 @@
+
+#pragma once
+
 #include <iostream>
 #include <string>
 
@@ -9,4 +12,4 @@
 using namespace std;
 using namespace YExcel ;
 
-void copySpreadsheetData(BasicExcel * source, BasicExcel * destination) ;
+void copySpreadsheetData(BasicExcel & source, BasicExcel & destination) ;

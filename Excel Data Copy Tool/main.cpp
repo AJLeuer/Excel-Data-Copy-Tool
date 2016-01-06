@@ -11,22 +11,14 @@ using namespace std;
 int main(int argc, char ** argv) {
 
 	//open source and destination workbooks
-	/*
-	Book * sourceBook = xlCreateXMLBook() ;
 	
-	Book * destinationBook = xlCreateXMLBook() ;
+	BasicExcel sourceBook("Sheet.xls") ;
 	
-	bool noErrorsLoading = (sourceBook->load(L"Transactions.xlsx") && destinationBook->load(L"Dye List.xlsx")) ;
+	BasicExcel destinationBook("Sheet.xls") ;
 
-	if (noErrorsLoading == false) {
-		cerr << "Problem loading Excel file" << endl ;
-		throw exception() ;
-	}
-
-	
 	copySpreadsheetData(sourceBook, destinationBook) ;
 	
-	 */
+	 
 
 
 
