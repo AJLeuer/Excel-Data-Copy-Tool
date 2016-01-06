@@ -6,15 +6,13 @@
 
 struct YarnEntry {
 
-	unsigned quantity ;
-
-	wstring type ;
+	wstring twoDigitCode ;
 
 	wstring color ;
 
-	YarnEntry(unsigned quantity, wstring type, wstring color) :
-		quantity(quantity), type(type), color(color) {}
+	unsigned quantity ;
+
+	YarnEntry(wstring twoDigitCode, wstring color, unsigned quantity) :
+		twoDigitCode(twoDigitCode), color(color), quantity(quantity) {}
 
 }
-	
-	

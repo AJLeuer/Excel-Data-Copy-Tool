@@ -11,14 +11,14 @@ using namespace std;
 int main(int argc, char ** argv) {
 
 	//open source and destination workbooks
-	
-	BasicExcel sourceBook("Sheet.xls") ;
-	
-	BasicExcel destinationBook("Sheet.xls") ;
+
+	BasicExcel sourceBook("Input.xls") ;
+
+	BasicExcel destinationBook("Output.xls") ;
 
 	copySpreadsheetData(sourceBook, destinationBook) ;
-	
-	 
+
+
 
 
 
