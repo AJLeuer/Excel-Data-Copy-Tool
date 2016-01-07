@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		663246831C3B2D0B00705337 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 663246821C3B2D0B00705337 /* main.cpp */; };
-		663246901C3B2F0600705337 /* DreamSheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6632468E1C3B2F0600705337 /* DreamSheet.cpp */; };
 		663246911C3B2F0600705337 /* SpreadsheetCopy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6632468F1C3B2F0600705337 /* SpreadsheetCopy.cpp */; };
 		66AD5F3F1C3C7B0200574508 /* BasicExcel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66AD5F3B1C3C7B0200574508 /* BasicExcel.cpp */; };
 /* End PBXBuildFile section */
@@ -29,13 +28,12 @@
 		6632467F1C3B2D0B00705337 /* Excel Data Copy Tool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Excel Data Copy Tool"; sourceTree = BUILT_PRODUCTS_DIR; };
 		663246821C3B2D0B00705337 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		6632468A1C3B2EDF00705337 /* Spreadsheet Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Spreadsheet Data"; sourceTree = "<group>"; };
-		6632468B1C3B2F0600705337 /* DreamSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DreamSheet.h; sourceTree = "<group>"; };
 		6632468C1C3B2F0600705337 /* SpreadsheetCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpreadsheetCopy.h; sourceTree = "<group>"; };
 		6632468D1C3B2F0600705337 /* YarnEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YarnEntry.h; sourceTree = "<group>"; };
-		6632468E1C3B2F0600705337 /* DreamSheet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DreamSheet.cpp; sourceTree = "<group>"; };
 		6632468F1C3B2F0600705337 /* SpreadsheetCopy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpreadsheetCopy.cpp; sourceTree = "<group>"; };
 		66AD5F3B1C3C7B0200574508 /* BasicExcel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BasicExcel.cpp; sourceTree = "<group>"; };
 		66AD5F3C1C3C7B0200574508 /* BasicExcel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BasicExcel.hpp; sourceTree = "<group>"; };
+		66E230741C3DF2CC00F63A26 /* Util.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Util.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,10 +68,9 @@
 		663246811C3B2D0B00705337 /* Excel Data Copy Tool */ = {
 			isa = PBXGroup;
 			children = (
+				66E230741C3DF2CC00F63A26 /* Util.hpp */,
 				6632468D1C3B2F0600705337 /* YarnEntry.h */,
-				6632468B1C3B2F0600705337 /* DreamSheet.h */,
 				6632468C1C3B2F0600705337 /* SpreadsheetCopy.h */,
-				6632468E1C3B2F0600705337 /* DreamSheet.cpp */,
 				6632468F1C3B2F0600705337 /* SpreadsheetCopy.cpp */,
 				663246821C3B2D0B00705337 /* main.cpp */,
 			);
@@ -148,7 +145,6 @@
 				663246831C3B2D0B00705337 /* main.cpp in Sources */,
 				663246911C3B2F0600705337 /* SpreadsheetCopy.cpp in Sources */,
 				66AD5F3F1C3C7B0200574508 /* BasicExcel.cpp in Sources */,
-				663246901C3B2F0600705337 /* DreamSheet.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

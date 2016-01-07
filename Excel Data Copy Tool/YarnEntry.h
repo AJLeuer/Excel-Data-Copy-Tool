@@ -2,17 +2,19 @@
 #pragma once
 
 #include <iostream>
-#include <wstring>
+#include <string>
+
+#include "Util.hpp"
 
 struct YarnEntry {
 
-	wstring twoDigitCode ;
+	string code ;
 
-	wstring color ;
+	string color ;
 
 	unsigned quantity ;
 
-	YarnEntry(wstring twoDigitCode, wstring color, unsigned quantity) :
-		twoDigitCode(twoDigitCode), color(color), quantity(quantity) {}
+	YarnEntry(string code, string color, unsigned quantity) :
+		code(clean(code)), color(clean(color)), quantity(quantity) {}
 
-}
+} ;

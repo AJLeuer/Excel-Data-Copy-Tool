@@ -13,15 +13,20 @@ vector<YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) {
 	 vector<YarnEntry> * yarnEntries = new vector<YarnEntry>() ;
 
 	 //We expect the list of transactions (the source) to be sheet at index 1 (the second sheet)
-	 BasicExcelWorksheet * sourceSheet = source.GetWorksheet(1) ;
+	 BasicExcelWorksheet * sourceSheet = source.GetWorksheet(size_t(1)) ;
 
 	 //the actual data on the source sheet starts at row 2 (i.e. 3rd row, BasicExcel counts rows starting at 0)
-	 for (unsigned row = 2 ; row < sourceSheet->GetTotalRows() ; row++) {
-		 const wchar_t * code = sourceSheet->Cell(row, 3)->GetWString()  ;
-		 const wchar_t * color = sourceSheet->Cell(row, 4)->GetWString() ;
-		 const unsigned quantity = sourceSheet->Cell(row, 2)->GetInteger() ;
+	 for (unsigned row = 1 ; row < sourceSheet->GetTotalRows() ; row++) {
+		 const char * code = sourceSheet->Cell(row, 2)->GetString()  ;
+		 const char * color = sourceSheet->Cell(row, 3)->GetString() ;
+		 const unsigned quantity = sourceSheet->Cell(row, 1)->GetInteger() ;
+		 
+		 if ((code == nullptr) || (color == nullptr)) {
+			 cout << "Bad data on row" << row << " of input spreadsheet, skipping." << endl ;
+			 continue ;
+		 }
 
-		 yarnEntries->push_back(YarnEntry(wstring(code), wstring(color), quantity)) ;
+		 yarnEntries->push_back(YarnEntry(string(code), string(color), quantity)) ;
 	 }
 
 	 return yarnEntries ;
@@ -30,21 +35,30 @@ vector<YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) {
 void copySpreadsheetData(vector<YarnEntry> * source, BasicExcel & destination) {
 
 	//We expect the sheet we're outputting to be sheet at index 0 (the first sheet)
-	BasicExcelWorksheet * destinationSheet = destination.GetWorksheet(0) ;
+	BasicExcelWorksheet * destinationSheet = destination.GetWorksheet(size_t(0)) ;
 
 
 	for (size_t i = 0 ; i < source->size() ; i++) {
 
 		YarnEntry & currentEntry = source->at(i) ;
+		bool currentEntryWrittenToCell = false ;
 
 		//the first row in our destination sheet is "Absolute Magenta," at index 2
 		for (unsigned row = 2 ; row < destinationSheet->GetTotalRows()  ; row++) {
+			
+			string rowName = getRowName(destinationSheet, row) ;
+			
+			if (currentEntry.color == rowName) {
 
-			if (currentEntry.color == getRowName(destinationSheet, row)) {
-
-				for (unsigned column = 2 ; column < destinationSheet->GetTotalRows()  ; column++) {
-
-					if (currentEntry.twoDigitCode == getColumnName(destinationSheet, column)) {
+				for (unsigned column = 2 ; column < destinationSheet->GetTotalCols()  ; column++) {
+					
+					if (colummExists(destinationSheet, column) == false) {
+						break ;
+					}
+					
+					string columnName = getColumnName(destinationSheet, column) ;
+					
+					if (currentEntry.code == columnName) {
 
 						BasicExcelCell * destinationCell = destinationSheet->Cell(row, column) ;
 
@@ -53,10 +67,16 @@ void copySpreadsheetData(vector<YarnEntry> * source, BasicExcel & destination) {
 						currentCellValue += currentEntry.quantity ;
 
 						destinationCell->SetInteger(currentCellValue) ;
+						
+						currentEntryWrittenToCell = true ;
+						break ;
 					}
 
 				}
 
+			}
+			if (currentEntryWrittenToCell) {
+				break ;
 			}
 
 		}
@@ -67,8 +87,34 @@ void copySpreadsheetData(vector<YarnEntry> * source, BasicExcel & destination) {
 	}
 
 
-
-
-
-
 }
+
+bool rowExists(BasicExcelWorksheet * sheet, unsigned rowNumber) {
+	char * empty = new char ;
+	bool exists =  sheet->Cell(rowNumber, 0)->Get(empty) ;
+	delete empty ;
+	return exists ;
+}
+
+bool colummExists(BasicExcelWorksheet * sheet, unsigned columnNumber) {
+	char * empty = new char ;
+	bool exists = sheet->Cell(0, columnNumber)->Get(empty) ;
+	delete empty ;
+	return exists ;
+}
+
+
+
+string getRowName(BasicExcelWorksheet * sheet, unsigned rowNumber) {
+	string row = string(sheet->Cell(rowNumber, 0)->GetString()) ;
+	return clean(row) ;
+}
+string getColumnName(BasicExcelWorksheet * sheet, unsigned columnNumber) {
+	string column = string(sheet->Cell(0, columnNumber)->GetString()) ;
+	return clean(column) ;
+}
+
+
+
+
+
