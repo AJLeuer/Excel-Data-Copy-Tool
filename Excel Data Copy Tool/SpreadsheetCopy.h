@@ -32,3 +32,9 @@ bool colummExists(BasicExcelWorksheet * sheet, unsigned columnNumber) ;
 
 string getRowName(BasicExcelWorksheet * sheet, unsigned rowNumber) ;
 string getColumnName(BasicExcelWorksheet * sheet, unsigned columnNumber) ;
+
+/**
+ * For a BasicExcelCell whose contents are unknown, this function extracts a string if
+ * it contains either a string or wstring, else otherwise throws an exception
+ */
+string extractStringFromUnknownCell(BasicExcelCell * cell) ;
