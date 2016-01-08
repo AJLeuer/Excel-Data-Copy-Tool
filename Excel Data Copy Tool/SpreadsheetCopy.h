@@ -6,6 +6,7 @@
 #include <string>
 
 #include "../BasicExcel/BasicExcel.hpp"
+//#include "../BasicExcel/ExcelFormat.h"
 
 #include "Util.hpp"
 #include "YarnEntry.h"
@@ -17,9 +18,9 @@ using namespace YExcel ;
 
 void copySpreadsheetData(BasicExcel & source, BasicExcel & destination) ;
 
-vector<YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) ;
+vector<const YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) ;
 
-void copySpreadsheetData(vector<YarnEntry> * source, BasicExcel & destination) ;
+void copySpreadsheetData(vector<const YarnEntry> * source, BasicExcel & destination) ;
 
 /**
  * Returns true if there is a string to label the start of this row, false otherwise

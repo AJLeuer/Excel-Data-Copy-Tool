@@ -3,14 +3,14 @@
 
 void copySpreadsheetData(BasicExcel & source, BasicExcel & destination) {
 
-	vector<YarnEntry> * yarnEntries = retrieveSpreadsheetData(source) ;
+	vector<const YarnEntry> * yarnEntries = retrieveSpreadsheetData(source) ;
 
 	copySpreadsheetData(yarnEntries, destination) ;
 }
 
-vector<YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) {
+vector<const YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) {
 
-	 vector<YarnEntry> * yarnEntries = new vector<YarnEntry>() ;
+	 vector<const YarnEntry> * yarnEntries = new vector<const YarnEntry>() ;
 
 	 //We expect the list of transactions (the source) to be sheet at index 1 (the second sheet)
 	 BasicExcelWorksheet * sourceSheet = source.GetWorksheet(size_t(1)) ;
@@ -21,19 +21,21 @@ vector<YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) {
 		 string code = extractStringFromUnknownCell(sourceSheet->Cell(row, 2)) ;
 		 string color = extractStringFromUnknownCell(sourceSheet->Cell(row, 3)) ;
 		 const unsigned quantity = sourceSheet->Cell(row, 1)->GetInteger() ;
-
-		 if ((code == nullptr) || (color == nullptr)) {
-			 cout << "Bad data on row" << row << " of input spreadsheet, skipping." << endl ;
+		 
+		 const YarnEntry entry(code, color, quantity) ;
+		 
+		 if (entry.checkValidity() == false) {
+			 cout << "Warning: bad data in cell(s) on row " << row + 1 << endl ;
 			 continue ;
 		 }
 
-		 yarnEntries->push_back(YarnEntry(code, color, quantity)) ;
+		 yarnEntries->push_back(entry) ;
 	 }
 
 	 return yarnEntries ;
 }
 
-void copySpreadsheetData(vector<YarnEntry> * source, BasicExcel & destination) {
+void copySpreadsheetData(vector<const YarnEntry> * source, BasicExcel & destination) {
 
 	//We expect the sheet we're outputting to be sheet at index 0 (the first sheet)
 	BasicExcelWorksheet * destinationSheet = destination.GetWorksheet(size_t(0)) ;
@@ -41,7 +43,7 @@ void copySpreadsheetData(vector<YarnEntry> * source, BasicExcel & destination) {
 
 	for (size_t i = 0 ; i < source->size() ; i++) {
 
-		YarnEntry & currentEntry = source->at(i) ;
+		const YarnEntry & currentEntry = source->at(i) ;
 		bool currentEntryWrittenToCell = false ;
 
 		/* the first row in our destination sheet is currently "Absolute Magenta," at index 2
@@ -118,16 +120,18 @@ string getColumnName(BasicExcelWorksheet * sheet, unsigned columnNumber) {
 
 string extractStringFromUnknownCell(BasicExcelCell * cell) {
 	int type = cell->Type() ;
+	
+	string str = "";
 
 	if (type == BasicExcelCell::WSTRING) {
 		wstring tempWString = wstring(cell->GetWString()) ;
-		row = convertToString(tempWString) ;
+		str = convertToString(tempWString) ;
 	}
 	else if (type == BasicExcelCell::STRING) {
-		row = string(cell->GetString()) ;
+		str = string(cell->GetString()) ;
 	}
 	else {
-		cerr << "Non-string data in cell where string was expected."  << endl ;
-		throw exception() ;
+		cerr << "Missing or non-string data in cell where string was expected."  << endl ;
 	}
+	return str ;
 }
