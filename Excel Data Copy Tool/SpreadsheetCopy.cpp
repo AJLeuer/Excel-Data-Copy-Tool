@@ -12,8 +12,8 @@ vector<const YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) {
 
 	 vector<const YarnEntry> * yarnEntries = new vector<const YarnEntry>() ;
 
-	 //We expect the list of transactions (the source) to be sheet at index 1 (the second sheet)
-	 BasicExcelWorksheet * sourceSheet = source.GetWorksheet(size_t(1)) ;
+	 //We expect the list of transactions (the source) to be sheet at index 0 (the first sheet)
+	 BasicExcelWorksheet * sourceSheet = source.GetWorksheet(size_t(0)) ;
 
 	 //the actual data on the source sheet starts at row 2 (i.e. the 3rd row, BasicExcel counts rows starting at 0)
 	 for (unsigned row = 1 ; row < sourceSheet->GetTotalRows() ; row++) {
