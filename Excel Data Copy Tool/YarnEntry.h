@@ -22,7 +22,7 @@ struct YarnEntry {
 	}
 	
 	friend bool operator > (const YarnEntry & first, const YarnEntry & second) {
-		return (!(first < second)) ;
+		return (first.color > second.color) ;
 	}
 	
 	/**
