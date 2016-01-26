@@ -118,6 +118,16 @@ string getColumnName(BasicExcelWorksheet * sheet, unsigned columnNumber) {
 	return clean(column) ;
 }
 
+void setRowName(BasicExcelWorksheet * sheet, unsigned rowNumber, string name) {
+	BasicExcelCell * rowStart = sheet->Cell(rowNumber, 0) ;
+	rowStart->SetString(name.c_str()) ;
+}
+
+void setColumnName(BasicExcelWorksheet * sheet, unsigned columnNumber, string name) {
+	BasicExcelCell * columnStart = sheet->Cell(0, columnNumber) ;
+	columnStart->SetString(name.c_str()) ;
+}
+
 string extractStringFromUnknownCell(BasicExcelCell * cell) {
 	int type = cell->Type() ;
 	
