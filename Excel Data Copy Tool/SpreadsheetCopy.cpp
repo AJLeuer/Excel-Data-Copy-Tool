@@ -31,6 +31,8 @@ vector<const YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) {
 
 		 yarnEntries->push_back(entry) ;
 	 }
+	 
+	 yarnEntries.sort(yarnEntries.begin(), yarnEntries.end()) ;
 
 	 return yarnEntries ;
 }
