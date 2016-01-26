@@ -42,55 +42,43 @@ void copySpreadsheetData(vector<const YarnEntry> * source, BasicExcel & destinat
 	//We expect the sheet we're outputting to be sheet at index 0 (the first sheet)
 	BasicExcelWorksheet * destinationSheet = destination.GetWorksheet(size_t(0)) ;
 
-
-	for (size_t i = 0 ; i < source->size() ; i++) {
+	
+	for (size_t i = 0, row = 2 ; i < source->size() ; i++) {
 
 		const YarnEntry & currentEntry = source->at(i) ;
-		bool currentEntryWrittenToCell = false ;
 
-		/* the first row in our destination sheet is currently "Absolute Magenta," at index 2
-		 hopefully, if this program works as intended, adding new rows or columns will not cause
-		 any issues
-		 */
-		for (unsigned row = 2 ; row < destinationSheet->GetTotalRows()  ; row++) {
-
-			if (rowExists(destinationSheet, row) == false) {
-				continue ; //then skip this row
+		//check to make sure there's a labelled row here
+		if (rowExists(destinationSheet, row)) {
+			if (currentEntry.color != getRowName(destinationSheet, row)) { //then we need to go to the next row and label it
+				row++ ;
+				setRowName(destinationSheet, row, currentEntry.color) ;
 			}
+		}
+		else { //otherwise label the row
+			setRowName(destinationSheet, row, currentEntry.color) ;	
+		}
 
-			string rowName = getRowName(destinationSheet, row) ;
+		for (unsigned column = 2 ; column < destinationSheet->GetTotalCols()  ; column++) {
 
-			if (currentEntry.color == rowName) {
-
-				for (unsigned column = 2 ; column < destinationSheet->GetTotalCols()  ; column++) {
-
-					if (colummExists(destinationSheet, column) == false) {
-						continue ; //then skip this column
-					}
-
-					string columnName = getColumnName(destinationSheet, column) ;
-
-					if (currentEntry.code == columnName) {
-
-						BasicExcelCell * destinationCell = destinationSheet->Cell(row, column) ;
-
-						int currentCellValue = destinationCell->GetInteger() ;
-
-						currentCellValue += currentEntry.quantity ;
-
-						destinationCell->SetInteger(currentCellValue) ;
-
-						currentEntryWrittenToCell = true ;
-						break ;
-					}
-
-				}
-
+			//we've reached a column that hasn't been labelled yet, so name it and put our entry here
+			if (colummExists(destinationSheet, column) == false) {
+				setColumnName(destinationSheet, columnn, currentEntry.code) ;
 			}
-			if (currentEntryWrittenToCell) {
+			
+			//if this column name matches our entry, write to the cell in that column
+			if (currentEntry.code == getColumnName(destinationSheet, column)) {
+				BasicExcelCell * destinationCell = destinationSheet->Cell(row, column) ;
+
+				int currentCellValue = destinationCell->GetInteger() ;
+
+				currentCellValue += currentEntry.quantity ;
+
+				destinationCell->SetInteger(currentCellValue) ;
+				
 				break ;
 			}
 		}
+		
 	}
 }
 
