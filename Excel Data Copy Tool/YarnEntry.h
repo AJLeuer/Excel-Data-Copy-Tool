@@ -6,6 +6,8 @@
 
 #include "Util.hpp"
 
+using namespace std ;
+
 struct YarnEntry {
 
 	string code = "" ;
@@ -16,13 +18,21 @@ struct YarnEntry {
 
 	YarnEntry(string code, string color, unsigned quantity) :
 		code(clean(code)), color(clean(color)), quantity(quantity) {}
-		
+
+	
 	friend bool operator < (const YarnEntry & first, const YarnEntry & second) {
 		return (first.color < second.color) ;
 	}
 	
 	friend bool operator > (const YarnEntry & first, const YarnEntry & second) {
 		return (first.color > second.color) ;
+	}
+	
+
+	friend void swap(YarnEntry & first, YarnEntry & second) {
+		std::swap(first.code, second.code) ;
+		std::swap(first.color, second.color) ;
+		std::swap(first.quantity, second.quantity) ;
 	}
 	
 	/**

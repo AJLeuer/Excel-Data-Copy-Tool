@@ -3,14 +3,14 @@
 
 void copySpreadsheetData(BasicExcel & source, BasicExcel & destination) {
 
-	vector<const YarnEntry> * yarnEntries = retrieveSpreadsheetData(source) ;
+	vector<YarnEntry> * yarnEntries = retrieveSpreadsheetData(source) ;
 
 	copySpreadsheetData(yarnEntries, destination) ;
 }
 
-vector<const YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) {
+vector<YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) {
 
-	 vector<const YarnEntry> * yarnEntries = new vector<const YarnEntry>() ;
+	 vector<YarnEntry> * yarnEntries = new vector<YarnEntry>() ;
 
 	 //We expect the list of transactions (the source) to be sheet at index 0 (the first sheet)
 	 BasicExcelWorksheet * sourceSheet = source.GetWorksheet(size_t(0)) ;
@@ -22,7 +22,7 @@ vector<const YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) {
 		 string color = extractStringFromUnknownCell(sourceSheet->Cell(row, 3)) ;
 		 const unsigned quantity = sourceSheet->Cell(row, 1)->GetInteger() ;
 		 
-		 const YarnEntry entry(code, color, quantity) ;
+		 YarnEntry entry(code, color, quantity) ;
 		 
 		 if (entry.checkValidity() == false) {
 			 cout << "Warning: bad data in cell(s) on row " << row + 1 << endl ;
@@ -32,37 +32,44 @@ vector<const YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) {
 		 yarnEntries->push_back(entry) ;
 	 }
 	 
-	 yarnEntries.sort(yarnEntries.begin(), yarnEntries.end()) ;
+	std::sort(yarnEntries->begin(), yarnEntries->end()) ;
 
-	 return yarnEntries ;
+	return yarnEntries ;
 }
 
-void copySpreadsheetData(vector<const YarnEntry> * source, BasicExcel & destination) {
+void copySpreadsheetData(vector<YarnEntry> * source, BasicExcel & destination) {
 
 	//We expect the sheet we're outputting to be sheet at index 0 (the first sheet)
 	BasicExcelWorksheet * destinationSheet = destination.GetWorksheet(size_t(0)) ;
 
 	
-	for (size_t i = 0, row = 2 ; i < source->size() ; i++) {
+	for (unsigned i = 0, row = 2 ; i < source->size() ; i++) {
 
 		const YarnEntry & currentEntry = source->at(i) ;
-
-		//check to make sure there's a labelled row here
-		if (rowExists(destinationSheet, row)) {
-			if (currentEntry.color != getRowName(destinationSheet, row)) { //then we need to go to the next row and label it
-				row++ ;
-				setRowName(destinationSheet, row, currentEntry.color) ;
+		
+		while (true) {
+			if (rowExists(destinationSheet, row)) {
+				if (currentEntry.color == getRowName(destinationSheet, row)) {
+					//then we're at the right row, so break out of the loop and start searching for the matching column
+					break ;
+				}
+				else { //if this row doesn't match our color
+					   //then go to the next
+					row++ ;
+				}
 			}
-		}
-		else { //otherwise label the row
-			setRowName(destinationSheet, row, currentEntry.color) ;	
+			else { //if we've reached an unlabelled row
+				//then label this row, and break out of the loop
+				setRowName(destinationSheet, row, currentEntry.color) ;
+				break ;
+			}
 		}
 
 		for (unsigned column = 2 ; column < destinationSheet->GetTotalCols()  ; column++) {
 
 			//we've reached a column that hasn't been labelled yet, so name it and put our entry here
 			if (colummExists(destinationSheet, column) == false) {
-				setColumnName(destinationSheet, columnn, currentEntry.code) ;
+				setColumnName(destinationSheet, column, currentEntry.code) ;
 			}
 			
 			//if this column name matches our entry, write to the cell in that column

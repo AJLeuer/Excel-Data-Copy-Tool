@@ -2,6 +2,7 @@
 #pragma once
 
 #include <vector>
+#include <algorithm>
 #include <iostream>
 #include <string>
 
@@ -18,9 +19,9 @@ using namespace YExcel ;
 
 void copySpreadsheetData(BasicExcel & source, BasicExcel & destination) ;
 
-vector<const YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) ;
+vector<YarnEntry> * retrieveSpreadsheetData(BasicExcel & source) ;
 
-void copySpreadsheetData(vector<const YarnEntry> * source, BasicExcel & destination) ;
+void copySpreadsheetData(vector<YarnEntry> * source, BasicExcel & destination) ;
 
 /**
  * Returns true if there is a string to label the start of this row, false otherwise

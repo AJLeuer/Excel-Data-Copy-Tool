@@ -27,7 +27,7 @@
 /* Begin PBXFileReference section */
 		6632467F1C3B2D0B00705337 /* Excel Data Copy Tool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Excel Data Copy Tool"; sourceTree = BUILT_PRODUCTS_DIR; };
 		663246821C3B2D0B00705337 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		6632468A1C3B2EDF00705337 /* Spreadsheet Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Spreadsheet Data"; sourceTree = "<group>"; };
+		6632468A1C3B2EDF00705337 /* Sample Spreadsheet Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Sample Spreadsheet Data"; sourceTree = "<group>"; };
 		6632468C1C3B2F0600705337 /* SpreadsheetCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpreadsheetCopy.h; sourceTree = "<group>"; };
 		6632468D1C3B2F0600705337 /* YarnEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YarnEntry.h; sourceTree = "<group>"; };
 		6632468F1C3B2F0600705337 /* SpreadsheetCopy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpreadsheetCopy.cpp; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 		663246761C3B2D0B00705337 = {
 			isa = PBXGroup;
 			children = (
-				6632468A1C3B2EDF00705337 /* Spreadsheet Data */,
+				6632468A1C3B2EDF00705337 /* Sample Spreadsheet Data */,
 				66AD5F3A1C3C7B0200574508 /* BasicExcel */,
 				663246811C3B2D0B00705337 /* Excel Data Copy Tool */,
 				663246801C3B2D0B00705337 /* Products */,
